@@ -140,60 +140,11 @@ function App() {
   })
 
   useEffect = (() => {
-    let temperatureValue = 0;
-    let windSpeedValue = 0;
-    let rindFallValue = -1;
-    let observationTimeValue = '';
-    let firstdscription = '';
+    console.log('execute function in useEffect')
+    fetchCurrentWeather();
+  }, []);
 
-    axios.get(XMLData1, {
-      "Content-Type": "application/xml; charset=utf-8"
-   })
-   .then((response) => {
-      const jsonData = JSON.parse(convert.xml2json(response.data, { compact: true, spaces: 2 }));
-      temperatureValue = jsonData.ActualWeatherBrief.Custom.Temperature.Value._text;
-      windSpeedValue = jsonData.ActualWeatherBrief.Custom.WindSpeed.Value._text;
-      rindFallValue = jsonData.ActualWeatherBrief.Custom.Rainfall.Value._text;
-      observationTimeValue = jsonData.ActualWeatherBrief.Custom.ValidFor._text;
-      console.log(observationTimeValue);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    axios.get(XMLData2, {
-      "Content-Type": "application/xml; charset=utf-8"
-   })
-   .then((response) => {
-      const jsonData = JSON.parse(convert.xml2json(response.data, { compact: true, spaces: 2 }));
-      firstdscription = jsonData.SevenDaysForecast.Custom.WeatherForecast[0].WeatherDescription._text;
-      if (rindFallValue != -1){
-        setCurrentWeather({
-          ...currentWeather,
-          temperature: temperatureValue,
-          dscription: firstdscription,
-          windSpeed: windSpeedValue,
-          rainFall: rindFallValue,
-          observationTime: observationTimeValue
-        });
-      }
-      else {
-        setCurrentWeather({
-          ...currentWeather,
-          temperature: temperatureValue,
-          dscription: firstdscription,
-          windSpeed: windSpeedValue,
-          rainFall: 0,
-          observationTime: observationTimeValue
-        });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}, []);
-
-  const handleClick = () => {
+  const fetchCurrentWeather = () => {
     let temperatureValue = 0;
     let windSpeedValue = 0;
     let rindFallValue = -1;
@@ -260,7 +211,7 @@ function App() {
           </CurrentWeather>
           <AirFlow><AirFlowIcon />{currentWeather.windSpeed} km/h</AirFlow>
           <Rain><RainIcon />{currentWeather.rainFall} mm</Rain>
-          <Refresh onClick={handleClick}>最後觀察時間:
+          <Refresh onClick={fetchCurrentWeather}>最後觀察時間:
             {new Intl.DateTimeFormat('zh-TW',{
               hour: 'numeric',
               minute: 'numeric',
