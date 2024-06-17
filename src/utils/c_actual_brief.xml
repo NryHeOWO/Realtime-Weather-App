@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ActualWeatherBrief>
+<System>
+<SysAuthor>DINF</SysAuthor>
+<SysPubdate>2024-06-17 10:56</SysPubdate>
+<SysLanguage>0</SysLanguage>
+</System>
+<Custom>
+<ValidFor>2024-06-17 11:00</ValidFor>
+<Temperature>
+<MeasureUnit>°C</MeasureUnit>
+<Type>3</Type>
+<Value>30</Value>
+</Temperature>
+<Humidity>
+<MeasureUnit>%</MeasureUnit>
+<Type>3</Type>
+<Value>85</Value>
+</Humidity>
+<WindSpeed>
+<MeasureUnit>km/h</MeasureUnit>
+<Type>3</Type>
+<Value>15</Value>
+<WindSpeedDescription>三級</WindSpeedDescription>
+</WindSpeed>
+<WindDirection>
+<MeasureUnit>°</MeasureUnit>
+<Type>3</Type>
+<Value>S</Value>
+<WindDescription>南</WindDescription>
+</WindDirection>
+<Rainfall>
+<MeasureUnit>mm</MeasureUnit>
+<Type>5</Type>
+<Value>2.4</Value>
+</Rainfall>
+<Icon>
+<IconName>ww-c02.gif</IconName>
+<IconURL>https://www.smg.gov.mo/icons/weatherIcon/ww-c02.gif</IconURL>
+</Icon>
+<WeatherStatus>02</WeatherStatus>
+<humanAT>33</humanAT>
+<comfK>77</comfK>
+<comfK_desc>2</comfK_desc>
+</Custom>
+</ActualWeatherBrief>

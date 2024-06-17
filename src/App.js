@@ -5,8 +5,9 @@ import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import convert from 'xml-js';
+import XMLData1 from './utils/c_actual_brief.xml';
+import XMLData2 from './utils/c_7daysforecast.xml';
 
-import { ReactComponent as DayCloudyIcon } from './images/day-cloudy.svg';
 import { ReactComponent as AirFlowIcon } from './images/airFlow.svg';
 import { ReactComponent as RainIcon } from './images/rain.svg';
 import { ReactComponent as RefreshIcon } from './images/refresh.svg';
@@ -126,62 +127,122 @@ const theme = {
 };
 
 function App() {
+
   const [currentTheme, setCurrentTheme] = useState('dark');
   const [currentWeather, setCurrentWeather] = useState({
-    locationName: '澳門半島',
-    dscription: '雷暴驟雨',
-    temperature: 25,
-    windSpeed: 1.1,
-    rainPossibility: 48.3,
-    observationTime: '2024-6-6 10:21:00',
+    locationName: '澳門',
+    dscription: '',
+    temperature: 0,
+    windSpeed: 0,
+    rainFall: 0,
+    observationTime: '2024-6-6 01:00',
+    iconSrc: "https://www.smg.gov.mo/icons/weatherIcon/ww-c02.gif"
   })
 
-  const [xmlContent, setXmlContent] = useState('');
-  const [jsonContent, setJsonContent] = useState('');
+  useEffect = (() => {
+    let temperatureValue = 0;
+    let windSpeedValue = 0;
+    let rindFallValue = -1;
+    let observationTimeValue = '';
+    let firstdscription = '';
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/weather');
-        const xmlData = await response.text();
-        setXmlContent(xmlData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  /*
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/c_actual_brief.xml');
-        const xmlData = await response.text();
-        setXmlContent(xmlData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
-  */
-  const handleClick = () => {
-    fetch('https://xml.smg.gov.mo/c_actual_brief.xml', {      
-      method: 'GET',
-      "Content-Type": "charset=utf-8"
-    })
-    .then((response) => {
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(response.data, "application/xml");
-      const jsonData = JSON.parse(convert.xml2json(xml, { compact: true, spaces: 2 }));
-      setJsonContent(jsonData);
-      const tempValue = jsonData.ActualWeatherBrief.Custom.Temperature.Value._text;
-      setCurrentWeather(currentWeather.temperature, tempValue);
-      console.log(tempValue);
+    axios.get(XMLData1, {
+      "Content-Type": "application/xml; charset=utf-8"
+   })
+   .then((response) => {
+      const jsonData = JSON.parse(convert.xml2json(response.data, { compact: true, spaces: 2 }));
+      temperatureValue = jsonData.ActualWeatherBrief.Custom.Temperature.Value._text;
+      windSpeedValue = jsonData.ActualWeatherBrief.Custom.WindSpeed.Value._text;
+      rindFallValue = jsonData.ActualWeatherBrief.Custom.Rainfall.Value._text;
+      observationTimeValue = jsonData.ActualWeatherBrief.Custom.ValidFor._text;
+      console.log(observationTimeValue);
     })
     .catch((error) => {
-      console.error('Error fetching XML data:', error);
+      console.error(error);
+    });
+
+    axios.get(XMLData2, {
+      "Content-Type": "application/xml; charset=utf-8"
+   })
+   .then((response) => {
+      const jsonData = JSON.parse(convert.xml2json(response.data, { compact: true, spaces: 2 }));
+      firstdscription = jsonData.SevenDaysForecast.Custom.WeatherForecast[0].WeatherDescription._text;
+      if (rindFallValue != -1){
+        setCurrentWeather({
+          ...currentWeather,
+          temperature: temperatureValue,
+          dscription: firstdscription,
+          windSpeed: windSpeedValue,
+          rainFall: rindFallValue,
+          observationTime: observationTimeValue
+        });
+      }
+      else {
+        setCurrentWeather({
+          ...currentWeather,
+          temperature: temperatureValue,
+          dscription: firstdscription,
+          windSpeed: windSpeedValue,
+          rainFall: 0,
+          observationTime: observationTimeValue
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, []);
+
+  const handleClick = () => {
+    let temperatureValue = 0;
+    let windSpeedValue = 0;
+    let rindFallValue = -1;
+    let observationTimeValue = '';
+    let firstdscription = '';
+
+    axios.get(XMLData1, {
+      "Content-Type": "application/xml; charset=utf-8"
+   })
+   .then((response) => {
+      const jsonData = JSON.parse(convert.xml2json(response.data, { compact: true, spaces: 2 }));
+      temperatureValue = jsonData.ActualWeatherBrief.Custom.Temperature.Value._text;
+      windSpeedValue = jsonData.ActualWeatherBrief.Custom.WindSpeed.Value._text;
+      rindFallValue = jsonData.ActualWeatherBrief.Custom.Rainfall.Value._text;
+      observationTimeValue = jsonData.ActualWeatherBrief.Custom.ValidFor._text;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    axios.get(XMLData2, {
+      "Content-Type": "application/xml; charset=utf-8"
+   })
+   .then((response) => {
+      const jsonData = JSON.parse(convert.xml2json(response.data, { compact: true, spaces: 2 }));
+      firstdscription = jsonData.SevenDaysForecast.Custom.WeatherForecast[0].WeatherDescription._text;
+      if (rindFallValue != -1){
+        setCurrentWeather({
+          ...currentWeather,
+          temperature: temperatureValue,
+          dscription: firstdscription,
+          windSpeed: windSpeedValue,
+          rainFall: rindFallValue,
+          observationTime: observationTimeValue
+        });
+      }
+      else {
+        setCurrentWeather({
+          ...currentWeather,
+          temperature: temperatureValue,
+          dscription: firstdscription,
+          windSpeed: windSpeedValue,
+          rainFall: 0,
+          observationTime: observationTimeValue
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }
 
@@ -195,10 +256,10 @@ function App() {
             <Temperature>
               {Math.round(currentWeather.temperature)} <Celsius>°C</Celsius>
             </Temperature>
-            <DayCloudyIcon />
+            <img src={currentWeather.iconSrc} height={100} weight={100} />
           </CurrentWeather>
-          <AirFlow><AirFlowIcon />{currentWeather.windSpeed}</AirFlow>
-          <Rain><RainIcon />{currentWeather.rainPossibility}</Rain>
+          <AirFlow><AirFlowIcon />{currentWeather.windSpeed} km/h</AirFlow>
+          <Rain><RainIcon />{currentWeather.rainFall} mm</Rain>
           <Refresh onClick={handleClick}>最後觀察時間:
             {new Intl.DateTimeFormat('zh-TW',{
               hour: 'numeric',
