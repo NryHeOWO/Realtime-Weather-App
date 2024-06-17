@@ -11,6 +11,7 @@ import XMLData2 from './utils/c_7daysforecast.xml';
 import { ReactComponent as AirFlowIcon } from './images/airFlow.svg';
 import { ReactComponent as RainIcon } from './images/rain.svg';
 import { ReactComponent as RefreshIcon } from './images/refresh.svg';
+import { ReactComponent as LoadingIcon} from './images/loading.svg';
 
 const Container = styled.div`
   background-color: ${({theme})=>theme.backgroundColor};
@@ -136,15 +137,17 @@ function App() {
     windSpeed: 0,
     rainFall: 0,
     observationTime: '2024-6-6 01:00',
-    iconSrc: "https://www.smg.gov.mo/icons/weatherIcon/ww-c02.gif"
+    iconSrc: "https://www.smg.gov.mo/icons/weatherIcon/ww-c02.gif",
+    isLoading: true
   })
 
-  useEffect = (() => {
+  useEffect(() => {
     console.log('execute function in useEffect')
     fetchCurrentWeather();
   }, []);
 
   const fetchCurrentWeather = () => {
+    setCurrentWeather((prevState) => ({...prevState, isLoading: true}))
     let temperatureValue = 0;
     let windSpeedValue = 0;
     let rindFallValue = -1;
@@ -178,7 +181,8 @@ function App() {
           dscription: firstdscription,
           windSpeed: windSpeedValue,
           rainFall: rindFallValue,
-          observationTime: observationTimeValue
+          observationTime: observationTimeValue,
+          isLoading: false
         });
       }
       else {
@@ -188,7 +192,8 @@ function App() {
           dscription: firstdscription,
           windSpeed: windSpeedValue,
           rainFall: 0,
-          observationTime: observationTimeValue
+          observationTime: observationTimeValue,
+          isLoading: false
         });
       }
     })
@@ -215,7 +220,7 @@ function App() {
             {new Intl.DateTimeFormat('zh-TW',{
               hour: 'numeric',
               minute: 'numeric',
-            }).format(dayjs(currentWeather.observationTime))}{''}<RefreshIcon /></Refresh>
+            }).format(dayjs(currentWeather.observationTime))}{''}{currentWeather.isLoading ? <LoadingIcon /> : <RefreshIcon /> }</Refresh>
         </WeatherCard>
       </Container>
     </ThemeProvider>
