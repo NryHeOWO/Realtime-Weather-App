@@ -154,9 +154,10 @@ function App() {
     let observationTimeValue = '';
     let firstdscription = '';
 
-    axios.get(XMLData1, {
-      "Content-Type": "application/xml; charset=utf-8"
-   })
+    fetch('https://xml.smg.gov.mo/c_actual_brief.xml', {      
+      method: 'GET',
+      "Content-Type": "charset=utf-8"
+    })
    .then((response) => {
       const jsonData = JSON.parse(convert.xml2json(response.data, { compact: true, spaces: 2 }));
       temperatureValue = jsonData.ActualWeatherBrief.Custom.Temperature.Value._text;
