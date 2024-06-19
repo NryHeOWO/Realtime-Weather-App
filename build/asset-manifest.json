@@ -1,34 +1,22 @@
 {
   "files": {
     "main.css": "/Realtime-Weather-App/static/css/main.08190a48.css",
-<<<<<<< Updated upstream
-    "main.js": "/Realtime-Weather-App/static/js/main.4521241c.js",
-    "static/js/453.6a0df24a.chunk.js": "/Realtime-Weather-App/static/js/453.6a0df24a.chunk.js",
-=======
     "main.js": "/Realtime-Weather-App/static/js/main.1bf22766.js",
     "static/js/845.6eec4b97.chunk.js": "/Realtime-Weather-App/static/js/845.6eec4b97.chunk.js",
->>>>>>> Stashed changes
     "service-worker.js": "/Realtime-Weather-App/service-worker.js",
-    "static/media/day-cloudy.svg": "/Realtime-Weather-App/static/media/day-cloudy.005047eeadbc034a7bfeedd9ffd99a0f.svg",
+    "static/media/c_7daysforecast.xml": "/Realtime-Weather-App/static/media/c_7daysforecast.926b197f7e473bb90139.xml",
     "static/media/rain.svg": "/Realtime-Weather-App/static/media/rain.8e10718e150267e9dc74f9cde4f669ea.svg",
     "static/media/refresh.svg": "/Realtime-Weather-App/static/media/refresh.e352fc8bae35a5d76241e0bd9ec1d4c5.svg",
     "static/media/airFlow.svg": "/Realtime-Weather-App/static/media/airFlow.93b49bb5f452a711b4783afb6e683672.svg",
+    "static/media/loading.svg": "/Realtime-Weather-App/static/media/loading.f8d56fd58925a1aaab4f80f1d8865c03.svg",
+    "static/media/c_actual_brief.xml": "/Realtime-Weather-App/static/media/c_actual_brief.b6738c6c0fd3ee67e6d9.xml",
     "index.html": "/Realtime-Weather-App/index.html",
     "main.08190a48.css.map": "/Realtime-Weather-App/static/css/main.08190a48.css.map",
-<<<<<<< Updated upstream
-    "main.4521241c.js.map": "/Realtime-Weather-App/static/js/main.4521241c.js.map",
-    "453.6a0df24a.chunk.js.map": "/Realtime-Weather-App/static/js/453.6a0df24a.chunk.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.08190a48.css",
-    "static/js/main.4521241c.js"
-=======
     "main.1bf22766.js.map": "/Realtime-Weather-App/static/js/main.1bf22766.js.map",
     "845.6eec4b97.chunk.js.map": "/Realtime-Weather-App/static/js/845.6eec4b97.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.08190a48.css",
     "static/js/main.1bf22766.js"
->>>>>>> Stashed changes
   ]
 }
