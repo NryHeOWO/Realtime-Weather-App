@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Realtime-Weather-App/static/css/main.08190a48.css",
-    "main.js": "/Realtime-Weather-App/static/js/main.1bf22766.js",
+    "main.js": "/Realtime-Weather-App/static/js/main.cd7a3839.js",
     "static/js/845.6eec4b97.chunk.js": "/Realtime-Weather-App/static/js/845.6eec4b97.chunk.js",
     "service-worker.js": "/Realtime-Weather-App/service-worker.js",
     "static/media/c_7daysforecast.xml": "/Realtime-Weather-App/static/media/c_7daysforecast.926b197f7e473bb90139.xml",
@@ -12,11 +12,11 @@
     "static/media/c_actual_brief.xml": "/Realtime-Weather-App/static/media/c_actual_brief.b6738c6c0fd3ee67e6d9.xml",
     "index.html": "/Realtime-Weather-App/index.html",
     "main.08190a48.css.map": "/Realtime-Weather-App/static/css/main.08190a48.css.map",
-    "main.1bf22766.js.map": "/Realtime-Weather-App/static/js/main.1bf22766.js.map",
+    "main.cd7a3839.js.map": "/Realtime-Weather-App/static/js/main.cd7a3839.js.map",
     "845.6eec4b97.chunk.js.map": "/Realtime-Weather-App/static/js/845.6eec4b97.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.08190a48.css",
-    "static/js/main.1bf22766.js"
+    "static/js/main.cd7a3839.js"
   ]
 }
